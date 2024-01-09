@@ -10,14 +10,24 @@ export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.primary};
   padding: 0 2rem;
   text-align: center;
+
+  ${(props) => props.theme.media.mobile} {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Title = styled.h1`
   color: ${(props) =>
     props.primary ?  props.theme.colors.secondary : props.theme.colors.text};
-  font-size: 3rem;
+  font-size: 4rem;
   font-family: "Cinzel", serif;
   background-color: transparent;
+
+  ${(props) => props.theme.media.mobile} {
+    font-size: 5rem;
+  }
 `;
 
 export const Subtitle = styled.h1`
@@ -28,3 +38,12 @@ export const Subtitle = styled.h1`
   background-color: transparent;
   padding: 10px;
 `;
+
+export const Text = styled.p`
+  color: ${(props) =>
+    props.primary ? props.theme.colors.secondary : props.theme.colors.text};
+  font-size: 1.2rem;
+  background-color: transparent;
+  padding: 10px;
+`;
+
