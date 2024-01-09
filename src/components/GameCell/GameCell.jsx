@@ -10,12 +10,14 @@ import { ReactComponent as IconO } from "../../assets/svg/icon-o.svg";
 import { ReactComponent as OIconOutline } from "../../assets/svg/icon-o-outline.svg";
 
 function GameCell({ cellItem, index }) {
-  const { updateBoard, game } = useContext(GameContext);
+  const { updateBoard, game, roundComplete } = useContext(GameContext);
   const { handleModal } = useContext(ModalContext)
 
   const cellClickHandler = () => {
     updateBoard(index);
-    if(checkForWinner(game.board)) {
+    const result = checkForWinner(game.board)
+    if(result) {
+      roundComplete(result)
       handleModal(<RoundOverModal />)
     }
   };
