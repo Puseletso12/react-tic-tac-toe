@@ -10,9 +10,9 @@ import { ReactComponent as IconO } from "../../assets/svg/icon-o.svg";
 import { ReactComponent as OIconOutline } from "../../assets/svg/icon-o-outline.svg";
 import { SfxContext } from "../../contexts/SfxContext";
 
-function GameCell({ cellItem, index }) {
+function GameCell({ cellItem, index, isWinningCell }) {
   const { updateBoard, game, roundComplete } = useContext(GameContext);
-  const { hoverSfx, clickSfx, winSfx, completedSfx } = useContext(SfxContext);
+  const { hoverSfx, clickSfx, winSfx } = useContext(SfxContext);
   const { handleModal } = useContext(ModalContext);
 
   const cellClickHandler = () => {
@@ -23,22 +23,22 @@ function GameCell({ cellItem, index }) {
       roundComplete(result);
       if (result !== "draw") {
         winSfx();
-      } else {
-        completedSfx();
       }
-      handleModal(<RoundOverModal />);
+      setTimeout(() => {
+        handleModal(<RoundOverModal />);
+      }, 2000);
     }
   };
   if (cellItem === "x") {
     return (
-      <CellStyle>
+      <CellStyle isWinningCell={isWinningCell ?? false}>
         <IconX className="marketItem" />
       </CellStyle>
     );
   } else if (cellItem === "o") {
     return (
-      <CellStyle>
-        <IconO className="marketItem" />
+      <CellStyle isWinningCell={isWinningCell ?? false}>
+        <IconO className="marketItem" isWinningCell={isWinningCell ?? false} />
       </CellStyle>
     );
   }
